@@ -1,24 +1,43 @@
  <!-- PHP -->
 
  <?php
- // Starting the session 
- session_start();
+ob_start();
+// Starting the session
+session_start();
+include "db.php";
+include 'header.php';
 
-    if (!isset($_SESSION['email']) AND !isset($_SESSION['password'])) 
-    {
-        header("Location:index.php");
-        // To check if user is logged in 
+$id = $_SESSION['id'];
+
+if (!isset($_SESSION['email']) and !isset($_SESSION['password'])) {
+    header("Location:index.php");
+    // To check if user is logged in
+} else {
+    // Destroying session if 30 mins have passed after logging in
+    $now = time();
+    if ($now > $_SESSION['expire']) {
+        session_destroy();
+        header("Location:index.php?sessiontimedout=true");
     }
-   else {
-       // Destroying session if 30 mins have passed after logging in 
-        $now = time();
-        if ($now > $_SESSION['expire']) {
-            session_destroy();
-            header("Location:index.php");
-        }
+}
+
+if (@isset($_GET['passwordchanged'])) {
+    echo '
+            <script>
+    swal({
+        title :"Change Successful" ,text : "Your password has been changed successfully" ,
+            icon : "success"
     }
-include('header.php');
+    ) . then (function () {
+        location.replace("/home.php");
+    });
+
+    </script> ';
+
+}
+
 ?>
+
 
 <body>
 
@@ -28,26 +47,42 @@ include('header.php');
 
             <!-- Section heading -->
             <h2 class="h1-responsive font-weight-bold text-center my-5"style="font-size:2.8rem; font-family: 'Ropa Sans',
-        sans-serif;">Ongoing Projects</h2>
+        sans-serif;">Growing projects</h2>
             <!-- Section description -->
-            <p class="text-center w-responsive mx-auto mb-5">Here are some of the projects on which we
-                are
-                working. We
-                all work in
-                a team beacause everyone has different idea of different things which made cHive
-                a
-                union of minds
-                with codes..</p>
+            <p class="text-center w-responsive mx-auto mb-5 grey-text">A brief display of projects in progress.</p>
 
-            <!-- Grid row -->
+<?php
+
+// Fetching all the available feed
+
+$query = "SELECT * FROM `projects` ORDER BY created DESC , proj_id DESC";
+$result = mysqli_query($link, $query);
+$rowcount = mysqli_num_rows($result);
+if ($rowcount > 0) {
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $proj_id = $row['proj_id'];
+        $leader_id = $row['leader_id'];
+        $cover = $row['cover'];
+        $title = $row['title'];
+        $idForData = preg_replace('/[^A-Za-z0-9]/', '', $title);
+        $brief = $row['brief'];
+        $resources = $row['resources'];
+        $author = $row['author'];
+        $time = $row['created'];
+        $description = $row['description'];
+
+        echo '
+
+    <!-- Grid row -->
             <div class="row">
 
                 <!-- Grid column -->
                 <div class="col-lg-5">
 
                     <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-                        <img class="img-fluid" src="https://www.fatbit.com/fab/wp-content/uploads/2015/09/reservation-1.png"
+                    <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4 zoom">
+                        <img class="img-fluid" src="' . $cover . '"
                             alt="Sample image">
                         <a>
                             <div class="mask rgba-white-slight"></div>
@@ -61,372 +96,81 @@ include('header.php');
                 <div class="col-lg-7">
 
                     <!-- Category -->
-                    <a href="#!" class="green-text">
-
-                    </a>
                     <!-- Post title -->
-                    <h3 class="font-weight-bold mb-3"><strong>Restaurant Reservation</strong></h3>
+                    <h3 class="font-weight-bold mb-3"><strong>' . $title . '</strong></h3>
+
                     <!-- Excerpt -->
-                    <p>A web application for reserving seats at local restaurants.
-                        <p class="grey-text">NEEDS : Designer , Database Analyst.</p>
+                    <p> ' . $brief . '
+                        <p class="grey-text">NEEDS : ' . $resources . '.</p>
                     </p>
                     <!-- Post data -->
-                    <p>by <a><strong>Bruce Wayne</strong></a>, 19/08/2018</p>
+                    <p>by <a><strong>' . $author . '</strong></a> ' . $time . '</p>
+
                     <!-- Read more button -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#basicExampleModal">
-                        Read More
+
+         <button class="btn btn-indigo round" type="button" data-toggle="collapse" data-target="#' . $idForData . '"
+      aria-expanded="false" aria-controls="collapseData">
+            Read More
                     </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Restaurant Reservation</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    What is Lorem Ipsum?
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic
-                                    typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing software like Aldus PageMaker including
-                                    versions of Lorem Ipsum.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" >Join</button>
 
-                                </div>
+                <!-- Collapsible element -->
+
+                            <div class="collapse" id="' . $idForData . '">
+                            <div class="mt-3">
+                              ' . $description . '
                             </div>
-                        </div>
-                    </div>
+                            <br>
+                            <form method="POST" action="">
+                           <span>
+                           <input type="hidden" name="leader_id" value="' . $leader_id . '"/>
+                           <input type="hidden" name="proj_id" value="' . $proj_id . '"/>
+                           <button name="join" type="submit"
+                                  class="btn btn-danger round btn-sm my-0">Join</button>
+                                  </span>
+                                  </form>
+                            </div>
+                <!-- / Collapsible element -->
 
                 </div>
                 <!-- Grid column -->
 
             </div>
             <!-- Grid row -->
+            <br>
+               <hr class="my-5">
+';
 
-            <hr class="my-5">
+    }
 
-            <!-- Grid row -->
-            <div class="row">
+}
 
-                <!-- Grid column -->
-                <div class="col-lg-7">
+if (isset($_POST['join'])) {
 
-                    <!-- Category -->
-                    <a href="#!" class="pink-text">
+    $proj_id_new = $_POST["proj_id"];
+    $leader_id_new = $_POST["leader_id"];
 
-                    </a>
-                    <!-- Post title -->
-                    <h3 class="font-weight-bold mb-3"><strong>Stat.us</strong></h3>
-                    <!-- Excerpt -->
-                    <p>
-                        Python Library for Probabilistic Graphical Models
-                        <p class="grey-text">NEEDS : High-level Developer , System Analyst.</p>
-                    </p>
-                    <!-- Post data -->
-                    <p>by <a><strong>Arthur Curry</strong></a>, 14/08/2018</p>
-                    <!-- Read more button -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-pink" data-toggle="modal" data-target="#basicExampleModal">
-                        Read More
-                    </button>
+    if ($id != $leader_id_new) {
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Stat.us</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    What is Lorem Ipsum?
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic
-                                    typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing software like Aldus PageMaker including
-                                    versions of Lorem Ipsum.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" >Join</button>
+        $query = "INSERT INTO `team_req`(`leader_id`, `mem_id`, `proj_id`) VALUES ('$leader_id_new','$id','$proj_id_new')";
+        $result = mysqli_query($link, $query);
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        if ($result) {
+            $msg = "Request Sent";
+            echo '<script>
+            swal("Success","Request to join the project sent successfully","success")
+    </script>';
 
-                </div>
-                <!-- Grid column -->
+        } else {
+            $error = mysqli_error($link);
+            echo '<script>
+            swal("Error","Could not send the request : ' . $error . '","error")
+    </script>';
+        }
+    }
+}
 
-                <!-- Grid column -->
-                <div class="col-lg-5">
-
-                    <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-2">
-                        <img class="img-fluid" src="https://www.edureka.co/blog/wp-content/uploads/2017/06/Python-Programming-Edureka.png"
-                            alt="Sample image">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-            <hr class="my-5">
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-lg-5">
-
-                    <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-                        <img class="img-fluid" src="https://imagescdn.tweaktown.com/news/5/3/53750_9083720594374535056458225636817_boost-app-making-skills-ruby-rails-training.jpg"
-                            alt="Sample image">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-lg-7">
-
-                    <!-- Category -->
-                    <a href="#!" class="indigo-text">
-
-                    </a>
-                    <!-- Post title -->
-                    <h3 class="font-weight-bold mb-3"><strong>Find Friends</strong></h3>
-                    <!-- Excerpt -->
-                    <p> Find friends with common interests and hobbies to hang out with.
-                        <p class="grey-text">NEEDS : Frontend Developer , Middle-tier Developer.</p>
-                    </p>
-                    <!-- Post data -->
-                    <p>by <a><strong>Barry Allen</strong></a>, 11/08/2018</p>
-                    <!-- Read more button -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#basicExampleModal">
-                        Read More
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"> ind Friends</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    What is Lorem Ipsum?
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic
-                                    typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing software like Aldus PageMaker including
-                                    versions of Lorem Ipsum.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" >Join</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-            <hr class="my-5">
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-lg-7">
-
-                    <!-- Category -->
-                    <a href="#!" class="pink-text">
-
-                    </a>
-                    <!-- Post title -->
-                    <h3 class="font-weight-bold mb-3"><strong>Architectural Space
-                    </strong></h3>
-                    <!-- Excerpt -->
-                    <p>
-                        You can experiment with design elements and mix and match styles. With VR tools, the range of color options gives you a better visualization than a standard pencil blueprint.
-                        <p class="grey-text">NEEDS : Low-level Developer , C++ Developer(Unreal).</p>
-                    </p>
-                    <!-- Post data -->
-                    <p>by <a><strong>Wanda Maximoff</strong></a>, 14/08/2018</p>
-                    <!-- Read more button -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-pink" data-toggle="modal" data-target="#basicExampleModal">
-                        Read More
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"> Architectural Space</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    What is Lorem Ipsum?
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                    scrambled it to make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic
-                                    typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing software like Aldus PageMaker including
-                                    versions of Lorem Ipsum.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" >Join</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-lg-5">
-
-                    <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-2">
-                        <img class="img-fluid" src="https://d3b8hk1o42ev08.cloudfront.net/wp-content/uploads/2017/11/VR4.jpg"
-                            alt="Sample image">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-            <hr class="my-5">
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-lg-5">
-
-                    <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-                        <img class="img-fluid" src="https://hackster.imgix.net/uploads/attachments/279343/upload_front-01-01_wCzutCbYqr.jpg?auto=compress%2Cformat&w=900&h=675&fit=min"
-                            alt="Sample image">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-lg-7">
-
-                    <!-- Category -->
-                    <a href="#!" class="indigo-text">
-
-                    </a>
-                    <!-- Post title -->
-                    <h3 class="font-weight-bold mb-3"><strong>J.A.R.V.I.S. : A Virtual Home Assistant</strong></h3>
-                    <!-- Excerpt -->
-                    <p> J.A.R.V.I.S. is a personal home automation assistant for controlling electrical home appliances integrated with an augmented reality app.
-
-
-                        <p class="grey-text">NEEDS : Low-level Developer ,  UX Developer.</p>
-                    </p>
-                    <!-- Post data -->
-                    <p>by <a><strong>Tony Stark</strong></a>, 11/08/2018</p>
-                    <!-- Read more button -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#basicExampleModalJ">
-                        Read More
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="basicExampleModalJ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">J.A.R.V.I.S. : A Virtual Home Assistant</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                Why tackle the Smart Home problem?
-Nowadays, people have smartphones with them all the time. So it makes sense to use these to control home appliances. Presented here is a home automation system using a simple Android app which you can use to control electrical appliances with voice commands. Using the app you can control all the appliances like TV, fans, light etc. It’s like a Siri which can be controlled using voice (command given by user). You can give the command to switch on or off the devices (like light, fan etc) and also manipulate them like fan speed, light intensity. Commands are sent via a Bluetooth module to Arduino. So there is no need for you to get up to switch on or switch off the device while watching a movie or doing some important work.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-secondary" >Join</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
+?>
 
         </section>
         <!-- Section: ongoing v.1 -->
@@ -437,14 +181,9 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
 
             <!-- Section heading -->
             <h2 class="h1-responsive font-weight-bold text-center my-5" style="font-size:2.8rem; font-family: 'Ropa Sans',
-        sans-serif;">Our best projects</h2>
+        sans-serif;">Top of the line work </h2>
             <!-- Section description -->
-            <p class="grey-text text-center w-responsive mx-auto mb-5">Nowadays some people see
-                documentation
-                and
-                there are
-                some
-                smart people who believe in logical presentation that's what we are doing. Here is a showcase of our work.</p>
+           <p class="text-center grey-text w-responsive mx-auto mb-5">An expo of all the best projects by cHive team and the users.</p>
 
             <div id="learn-more" class="container">
                 <!-- Section: Projects START -->
@@ -455,7 +194,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-6">
                             <!--Featured image-->
                             <div class="view overlay rounded z-depth-1 zoom">
-                                <img src="./img/weather.jpg" class="img-fluid" alt=" Project image">
+                                <img src="./img/projects/weather.jpg" class="img-fluid" alt=" Project image">
                                 <a id="dwn"
                                 href="https://github.com/ingeniousambivert/weather-fetching"
                                     target="_blank">
@@ -471,7 +210,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     of
                                     this project uses PHP and the front-end uses Bootstrap v4.
                                 </p>
-                                
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -481,7 +220,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                             <!--Featured image-->
                             <div class="view overlay rounded z-depth-1 zoom">
-                                <img src="./img/omnifood.png" class="img-fluid" alt="Sample project image">
+                                <img src="./img/projects/omnifood.png" class="img-fluid" alt="Sample project image">
                                 <a>
                                     <a target="_blank" href="https://omni-food-project.000webhostapp.com/web.html">
                                         <div class="mask flex-center rgba-white-slight">
@@ -498,7 +237,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     purely built from scratch.
 
                                 </p>
-                              
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -507,7 +246,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                             <!--Featured image-->
                             <div class="view overlay rounded z-depth-1 zoom">
-                                <img src="./img/diary.png" class="img-fluid" alt="Project image">
+                                <img src="./img/projects/diary.png" class="img-fluid" alt="Project image">
                                 <a target="_blank" href="https://github.com/ingeniousambivert/diary" >
                                     <div class="mask flex-center rgba-teal-slight">
                                         <p class="white-text mask flex-center rgba-green-light">Solo Project</p>
@@ -522,7 +261,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     uses PHP and the front-end uses Bootstrap v4.
 
                                 </p>
-                                
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -534,7 +273,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                             <!--Featured image-->
                             <div class="view overlay zoom rounded z-depth-1 zoom">
-                                    <img src="./img/ngo.png" class="img-fluid" alt="Sample project image">
+                                    <img src="./img/projects/ngo.png" class="img-fluid" alt="Sample project image">
                                 <a target="_blank" href="https://github.com/ingeniousambivert/ngo">
                                     <div class="mask flex-center rgba-grey-light">
                                         <p class="white-text mask flex-center rgba-black-light">Collaborated
@@ -550,7 +289,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     project uses PHP and the
                                     front-end uses Bootstrap v4.
                                 </p>
-               
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -559,7 +298,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                             <!--Featured image-->
                             <div class="view overlay rounded z-depth-1 zoom">
-                                <img src="./img/shout.png" class="img-fluid" alt="Sample project image">
+                                <img src="./img/projects/shout.png" class="img-fluid" alt="Sample project image">
                                 <a target="_blank" href="https://github.com/ingeniousambivert/shout-it">
                                     <div class="mask flex-center rgba-white-strong">
                                         <p class="black-text mask flex-center rgba-grey-slight">Solo Project</p>
@@ -575,7 +314,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     project uses PHP and the
                                     front-end uses Bootstrap v4.
                                 </p>
-                                
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -584,7 +323,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                         <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
                             <!--Featured image-->
                             <div class="view overlay zoom rounded z-depth-1 zoom">
-                                <img src="./img/glsinfo.jpg" class="img-fluid" alt="Project image">
+                                <img src="./img/projects/glsinfo.jpg" class="img-fluid" alt="Project image">
                                 <a href="https://github.com/ingeniousambivert/glsinfo" target="_blank">
                                     <div class="mask flex-center rgba-grey-light">
                                         <p class="white-text mask flex-center rgba-black-light">Collaborated
@@ -600,7 +339,7 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
                                     is
                                     purely built from scratch.
                                 </p>
-                                
+
                             </div>
                         </div>
                         <!-- Grid column -->
@@ -625,9 +364,9 @@ Nowadays, people have smartphones with them all the time. So it makes sense to u
         sans-serif;margin-top:2%;">Whats Going On ?</h2>
                 <!-- Section description -->
                 <p class="text-center dark-grey-text w-responsive mx-auto mb-5">We also present a continuous,
-                    customizable
+                    customized
                     flow of articles
-                    organized from thousands of publishers and magazines.</p>
+                    organized from ratified publishers and magazines.</p>
 
                 <!-- Grid row -->
                 <div class="row">
@@ -779,7 +518,7 @@ href="https://techcrunch.com/2018/12/28/the-very-slow-movie-player-shows-a-film-
 
                                     <!--Image-->
                                     <div class="view overlay rounded z-depth-1 mb-4">
-                                        <img class="img-fluid" src="https://yalujailbreak.b-cdn.net/wp-content/uploads/2016/12/cydia-installer.png"
+                                      <img class="img-fluid" src="https://i.ytimg.com/vi/jloL2NiqWUE/maxresdefault.jpg"
                                             alt="Sample image">
                                         <a>
                                             <div class="mask rgba-white-slight"></div>
@@ -871,6 +610,6 @@ href="https://techcrunch.com/2018/12/10/krisp-reduces-noise-on-calls-using-machi
             <!-- Section: Magazine v.2 -->
         </div>
     </div>
-<?php 
-include('footer.php');
+<?php
+include 'footer.php';
 ?>

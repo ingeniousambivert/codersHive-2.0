@@ -1,5 +1,5 @@
-<?php 
-include("header.php");
+<?php
+include "header.php";
 ?>
 
 <body>
@@ -25,7 +25,7 @@ include("header.php");
 
                 <div class="container" style="margin-top:3%;">
                     <!-- Jumbotron -->
-                    <div class="card card-image" style="background-image: url('./img/learn1.png');">
+                    <div class="card card-image" style="background-image: url('./img/learn/learn1.png');">
                         <div class="text-white text-center rgba-stylish-strong py-5 px-4">
                             <div class="py-5">
 
@@ -37,7 +37,7 @@ include("header.php");
                                     building virtual reality (VR)
                                     experiences.</p>
                                 <a href="https://aframe.io/docs/0.8.0/introduction/" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo">Read
+                                        class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -56,7 +56,7 @@ include("header.php");
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="./img/learn2.png" alt="Card image cap">
+                                <img class="card-img-top" src="./img/learn/learn2.png" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -72,7 +72,7 @@ include("header.php");
                                     A lightweight JavaScript library for creating particles .</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://github.com/VincentGarreau/particles.js/" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo">Read
+                                        class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -85,7 +85,7 @@ include("header.php");
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="./img/learn3.png" alt="Card image cap">
+                                <img class="card-img-top" src="./img/learn/learn3.png" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -102,7 +102,7 @@ include("header.php");
                                     application into two parts: the view and the data. </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://kbrsh.github.io/moon/doc/about.html" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo">Read
+                                        class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -115,7 +115,7 @@ include("header.php");
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="./img/learn4.png" alt="Card image cap">
+                                <img class="card-img-top" src="./img/learn/learn4.png" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -131,7 +131,7 @@ include("header.php");
                                     controlled
                                     by JavaScript Power</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://webkul.github.io/micron/"> <button target="_blank" type="button" class="btn btn-sm indigo">Read
+                                <a href="https://webkul.github.io/micron/"> <button target="_blank" type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -158,7 +158,7 @@ include("header.php");
                                 <p class="mb-4 pb-2 px-md-5 mx-md-5">Spring Framework is a Java platform that provides
                                     comprehensive infrastructure
                                     support for developing Java applications. </p>
-                                <a href="https://spring.io/" target="_blank"> <button type="button" class="btn btn-sm indigo">Read
+                                <a href="https://spring.io/" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -195,7 +195,7 @@ include("header.php");
                                     Structured Query Language (SQL). </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://www.oracle.com/technetwork/database/features/plsql/index.html" target="_blank">
-                                    <button type="button" class="btn btn-sm indigo">Read
+                                    <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -227,7 +227,7 @@ include("header.php");
                                 </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2"
-                                    target="_blank"> <button type="button" class="btn btn-sm indigo">Read
+                                    target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -240,7 +240,7 @@ include("header.php");
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="./img/learn5.png" alt="Card image cap">
+                                <img class="card-img-top" src="./img/learn/learn5.png" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -257,7 +257,7 @@ include("header.php");
                                     by JavaScript Power</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://github.com/Automattic/mongoose"> <button target="_blank" type="button"
-                                        class="btn btn-sm indigo">Read
+                                        class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -284,7 +284,7 @@ include("header.php");
                                 <p class="mb-4 pb-2 px-md-5 mx-md-5">A-Frame is an open-source web framework for
                                     building virtual reality (VR)
                                     experiences.</p>
-                                <a href="https://flutter.io/docs" target="_blank"> <button type="button" class="btn btn-sm indigo">Read
+                                <a href="https://flutter.io/docs" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -321,7 +321,7 @@ include("header.php");
                                     security, protecting your website from
                                     hacks and malware.</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://www.wordfence.com/" target="_blank"> <button type="button" class="btn btn-sm indigo">Read
+                                <a href="https://www.wordfence.com/" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -351,7 +351,7 @@ include("header.php");
                                     whole API lifecycle from design
                                     to sharing. </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://raml.org/" target="_blank"> <button type="button" class="btn btn-sm indigo">Read
+                                <a href="https://raml.org/" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -383,7 +383,7 @@ include("header.php");
                                     Microsoft-managed data centers.</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
                                 <a href="https://azure.microsoft.com/en-in/"> <button target="_blank" type="button"
-                                        class="btn btn-sm indigo">Read
+                                        class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -397,6 +397,6 @@ include("header.php");
             </div>
         </div>
     </div>
-<?php 
-include("footer.php");
+<?php
+include "footer.php";
 ?>

@@ -1,0 +1,125 @@
+html,
+body,
+header {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 840px) {
+  html,
+  body,
+  header {
+    height: 100vh;
+    width: 100vw;
+  }
+  #hero-svg {
+    display: none;
+  }
+  #head {
+    font-size: 6rem !important;
+    text-align: center !important;
+  }
+  #subhead {
+    text-align: center !important;
+  }
+}
+
+.nav-links {
+  font-family: Roboto Condensed !important;
+}
+
+.nav-purple {
+  background-color: #4842b7;
+  color: white;
+}
+
+.top-nav-collapse {
+  background-color: #4842b7;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar:not(.top-nav-collapse) {
+    background-color: #4842b7;
+    color: white;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+  .navbar:not(.top-nav-collapse) {
+    background-color: #4842b7;
+    color: white;
+  }
+}
+
+@media (max-width: 340px) {
+  #head {
+    font-size: 2rem;
+  }
+}
+
+#intro {
+  background: #6441a5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    #4842b7,
+    #5645c6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    #4842b7,
+    #5645c6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#head {
+  color: white;
+  font-family: "Six Caps", sans-serif;
+  font-weight: 100px;
+  font-size: 12rem;
+  text-align: right;
+  margin-right: 5%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#subhead {
+  color: #efefef;
+  font-family: "Raleway", sans-serif;
+  font-weight: 100px;
+  font-size: 1.25rem;
+  text-align: right;
+  margin-right: 5%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#ssubhead {
+  color: #efefef;
+  font-family: "Roboto condensed", sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+  float: right;
+  margin-right: 5%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#sbtn {
+  color: #4842b7;
+  font-weight: bold;
+  float: right;
+  margin-right: 5%;
+  background: white;
+}
+
+#sgbtn {
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+.btn {
+  border-radius: 25px;
+}

@@ -1,7 +1,12 @@
 
 
 <!-- Footer -->
-    <footer class="page-footer font-small unique-color-dark">
+    <footer class="page-footer font-small unique-color-dark" style="bottom:0;
+
+ -webkit-box-shadow: 0px -2px 5px 0px rgba(0,0,0,0.17) , inset 0px 5px 10px -1px rgba(0,0,0,0.12);
+-moz-box-shadow: 0px -2px 5px 0px rgba(0,0,0,0.17) , inset 0px 5px 10px -1px rgba(0,0,0,0.12);
+box-shadow: 0px -2px 5px 0px rgba(0,0,0,0.17) , inset 0px 5px 10px -1px rgba(0,0,0,0.12);
+    ">
 
         <div style="background-color: #4842B7;">
             <div class="container">
@@ -16,27 +21,20 @@
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                    <div class="col-md-6 col-lg-7 text-center text-md-right" >
 
                         <!-- Facebook -->
-                        <a class="fb-ic">
-                            <i class="fa fa-facebook white-text mr-4"> </i>
+                        <a class="fb-ic" style="padding:5px;">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
-                        <!-- Twitter -->
-                        <a class="tw-ic">
-                            <i class="fa fa-twitter white-text mr-4"> </i>
+                        <!-- Github -->
+                        <a class="tw-ic"style="padding:5px;" target="_blank" href="https://github.com/c0dershive/">
+                            <i class="fab fa-github"></i>
                         </a>
-                        <!-- Google +-->
-                        <a class="gplus-ic">
-                            <i class="fa fa-google-plus white-text mr-4"> </i>
-                        </a>
-                        <!--Linkedin -->
-                        <a class="li-ic">
-                            <i class="fa fa-linkedin white-text mr-4"> </i>
-                        </a>
+
                         <!--Instagram-->
-                        <a class="ins-ic">
-                            <i class="fa fa-instagram white-text"> </i>
+                        <a class="ins-ic"style="padding:5px;">
+                            <i class="fab fa-instagram"></i>
                         </a>
 
                     </div>
@@ -93,11 +91,11 @@
                 <p>Effective date: January 02, 2019</p>
 
 
-                <p>codersHive ("us", "we", or "our") operates the codershive.com website (the "Service").</p>
+                <p>codersHive ("us", "we", or "our") operates the codershive website (the "Service").</p>
 
                 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. Our Privacy Policy  for codersHive is based on the <a href="https://www.freeprivacypolicy.com/blog/sample-privacy-policy-template/">Free Privacy Policy Template Website</a>.</p>
 
-                <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from codershive.com</p>
+                <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from codershive website</p>
 
 
                 <h2>Information Collection And Use</h2>
@@ -130,8 +128,8 @@
                 </ul>
 
                 <h2>Use of Data</h2>
-                    
-                <p>codersHive uses the collected data for various purposes:</p>    
+
+                <p>codersHive uses the collected data for various purposes:</p>
                 <ul>
                     <li>To provide and maintain the Service</li>
                     <li>To notify you about changes to our Service</li>
@@ -168,7 +166,7 @@
                 <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
 
                 <h3>Analytics</h3>
-                <p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>    
+                <p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
                 <ul>
                         <li>
                         <p><strong>Google Analytics</strong></p>
@@ -197,12 +195,12 @@
                 <h2>Contact Us</h2>
                 <p>If you have any questions about this Privacy Policy, please contact us:</p>
                 <ul>
-                        <li>By email: codershive2019@gmail.com</li>
-                        
+                        <li>By email: contactcodershive@gmail.com</li>
+
                         </ul>
                     </div>
                     <div class="modal-footer" style="background: #4842B7;">
-                        
+
                     </div>
                     </div>
                 </div>
@@ -225,11 +223,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                  
+
                 <p>Last updated: January 02, 2019</p>
 
 
-                <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the codershive.com
+                <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the codershive website
                     website (the "Service") operated by codershive ("us", "we", or "our").</p>
 
                 <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These
@@ -309,17 +307,17 @@
                 <p>If you have any questions about these Terms, please contact us.</p>
                                         </div>
                         <div class="modal-footer" style="background: #4842B7;">
-                            
+
                         </div>
                         </div>
                     </div>
                     </div>
                     </p>
                     <p>
-                        <a href="#!">Frequently Asked Questions</a>
+                        <a href="#!">Events </a>
                     </p>
                     <p>
-                        <a href="contact.html">Help</a>
+                        <a href="contact.php">Help</a>
                     </p>
 
                 </div>
@@ -334,7 +332,7 @@
                     <p>
                         <i class="fa fa-home mr-3"></i> GLS University , Ahmedabad</p>
                     <p>
-                        <i class="fa fa-envelope mr-3"></i> codershive@gmail.com</p>
+                        <i class="fa fa-envelope mr-2"></i> contactcodershive@gmail.com</p>
                     <p>
                         <i class="fa fa-phone mr-3"></i> + 1800-CODERS-HIVE</p>
 
@@ -359,7 +357,8 @@
     <!-- End your project here-->
 
     <!-- SCRIPTS -->
-    
+    <script type="text/javascript" src="js/script.js.bak"></script>
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -368,24 +367,43 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
+
     <script>
         var btn = document.querySelector("#ebutton");
         var check = true;
         var edits = document.querySelectorAll(".edit");
+        $("#prof_btn").slideUp();
+                check = true;
+         $("#up_btn").slideUp();
+                check = true;
         btn.addEventListener("click", function () {
             if (check) {
                 for (var edit of edits) {
                     edit.disabled = false;
                 }
+                $("#prof_btn").slideDown();
+                check = false;
+                $("#up_btn").slideDown();
                 check = false;
             } else {
                 for (var edit of edits) {
                     edit.disabled = true;
                 }
+                $("#prof_btn").slideUp();
+                check = true;
+                $("#up_btn").slideUp();
                 check = true;
             }
         });
+        Swal.fire({
+  title: 'Error!',
+  text: 'Do you want to continue',
+  type: 'error',
+  confirmButtonText: 'Cool'
+})
     </script>
+
+
 </body>
 
 </html>

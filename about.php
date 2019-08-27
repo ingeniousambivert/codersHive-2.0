@@ -1,25 +1,23 @@
 <!-- PHP -->
 
-<?php 
+<?php
 session_start();
- if
-  (isset($_SESSION['email']) AND isset($_SESSION['password'])) 
-    {
-        include("header.php");
-        // To check if the user is logged in and include the header in.
-    }
+if
+(isset($_SESSION['email']) and isset($_SESSION['password'])) {
+    include "header.php";
+    // To check if the user is logged in and include the header in.
+} else {
+    include "header_guest.php";
+    // To include the guest header in.
+}
 
-    else{
-        include("header_guest.php");
-        // To include the guest header in.
-    }
 ?>
 
 <body>
 
     <!-- Start your project here-->
     <section id="about">
-        <div class="container" style="margin-top: 6%;">
+        <div class="loda mera" style="margin-top: 6%;">
             <!-- Section: Team v.1 -->
             <section class="team-section text-center my-5">
 
@@ -51,9 +49,10 @@ session_start();
                     <div class="card-body text-center">
 
                         <!--Title-->
-                        <a href="https://ingeniousambivert.github.io/" target="_blank">
-                            <h4 class="card-title ">Monarch Maisuriya</h4>
-                        </a>
+                        <h4 class="card-title ">
+                        <a href="https://ingeniousambivert.github.io/" style="color:white"target="_blank">
+                            Monarch Maisuriya
+                        </a></h4>
                         <!--Text-->
                         <p class="card-text white-text">Co-Founder | Core Developer</p>
 
@@ -71,7 +70,10 @@ session_start();
                     <div class="card-body text-center">
 
                         <!--Title-->
-                        <h4 class="card-title ">Himanshu Joshi</h4>
+                         <h4 class="card-title ">
+                       <a href="#" style="color:white"target="_blank">
+                          Himanshu Joshi
+                        </a></h4>
                         <!--Text-->
                         <p class="card-text white-text">Co-Founder | Core Developer</p>
 
@@ -162,6 +164,6 @@ session_start();
 
     </section>
 
-<?php 
-include("footer.php");
+<?php
+include "footer.php";
 ?>
