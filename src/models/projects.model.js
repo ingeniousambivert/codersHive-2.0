@@ -7,19 +7,17 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
 
   const { Schema } = mongooseClient;
-  const { Mixed, ObjectId } = mongooseClient.Schema.Types;
+  const { ObjectId } = mongooseClient.Schema.Types;
 
   const schema = new Schema(
     {
       title: { type: String, required: true },
       description: { type: String },
-      niche: { type: String, required: true },
       owner: { type: String, required: true },
       active: {
         type: Boolean,
         default: true
       },
-      integrations: { Mixed },
       managers: [
         {
           type: ObjectId,
