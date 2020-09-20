@@ -6,3 +6,6 @@ Community and a Project Management Tool for GLS Coders.
 # codersHive 2.0
 
 codersHive revamped with newer technologies
+
+- client
+- server
