@@ -153,7 +153,7 @@ include "header.php";
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing"
-                    aria-selected="false" style="color: #b9b9b9;">Ongoing Projects</a>
+                    aria-selected="false" style="color: #b9b9b9;">Ongoing Project</a>
             </li>
 
             <li class="nav-item">
@@ -337,7 +337,7 @@ if (is_null($profile)) {
 ?>" style="border-radius:25% ;width:120px;height;120px; ">
                             </a>
 
-                        <div class="container" style="margin-bottom:;">
+                        <div class="container">
 
                         <a data-toggle="modal" class="pull-right" data-target="#editProfile" id="prof_btn" style="margin:5%;">
                         <i class="far fa-edit"></i></a>
@@ -416,44 +416,64 @@ echo $portfolio; ?>"
   <div class="w-auto h-100" style="padding:2%;margin-top:2%;">
 		<div class="row justify-content-center h-100">
 			<div class="col-md-3 chat">
-				<div class="card mb-sm-3 mb-md-0 contacts w-75 p-3 " style="height: 400px;
+				<div class="card mb-sm-3 mb-md-0 contacts w-75 p-3 hoverable" style="height: 400px;
 			border-radius: 15px;">
 					<div class="card-header text-center" style="background-color: #4842B7;color:white;">
                     <h6>Your Projects</h6>
-                    </div>
-
+					</div>
 					<div class="card-body contacts_body" style="border: 0.5px solid #f2f2f2;">
 						<ul class="contacts text-center" style="margin-top:10%;padding:10%;">
 							<li class="active">
 								<div class="d-flex bd-highlight">
 
 									<div class="user_info ">
-								<span class="text-center"><?php $query1 = @"SELECT * FROM projects WHERE projects.leader_id = $id";
-$result1 = @mysqli_query($link, $query1);
-$rowcount1 = @mysqli_num_rows($result1);
-if ($rowcount1 > 0) {
-    while ($row1 = mysqli_fetch_array($result1)) {
-        $proj_id = $row1['proj_id'];
-        $proj_title = $row1['title'];
-        echo $proj_title . "<br> <hr> </span>";
-    }
-}
-?>
+										<span class="text-center">Project 1</span>
+
+                                    </div>
+
+                                </div>
+                                <hr>
+							</li>
+							<li>
+								<div class="d-flex bd-highlight ">
+
+									<div class="user_info ">
+										<span class="text-center">Project 2</span>
+
+                                    </div>
+
+                                </div>
+                                <hr>
+							</li>
+							<li>
+								<div class="d-flex bd-highlight">
+
+									<div class="user_info ">
+										<span class="text-center">Project 3</span>
+
+                                    </div>
+
+                                </div>
+                            <hr>
+							</li>
+                            <li>
+								<div class="d-flex bd-highlight">
+
+									<div class="user_info ">
+										<span class="text-center">Project 4</span>
 
                                     </div>
 
                                 </div>
 
-
 							</li>
 
-                        </ul>
 
+						</ul>
 					</div>
 					<div class="card-footer" style="background-color: #4842B7;color:white;"></div>
 				</div>
-            </div>
-
+			</div>
 			<div class="col-md-9 chat">
 				<div class="card" style="height: 500px;
 			border-radius: 15px;">
@@ -471,31 +491,56 @@ if ($rowcount1 > 0) {
 					<div class="card-body msg_card_body">
                     <!-- CHATS -->
 					<div id="container">
-            <div class="shouts">
+            <div class="chats">
 
 
-                    <?php while ($row = @mysqli_fetch_assoc($chat)):
-    $name = $row['name'];
-    $message = $row['message'];
-    $decmsg = base64_decode($message);?>
-						  <div class="d-flex justify-content-start mb-4">
-								<div class="msg_cotainer">
-		 <?php echo '<small class="text-muted"> ' . $name . '</small><br>' . $decmsg; ?>
-		<span class="msg_time"><?php echo $row['time']; ?></span>
-		</div>
-		</div>
-		<?php endwhile;?>
+                    <?php while ($row = @mysqli_fetch_assoc($chat)) {
+                        $name = $row['name'];
+                        $message = $row['message'];
+                        $time = $row['time'];
+
+                        ?>
+
+                    <?php 
+                    
+                    if ($row['user_id'] == $id)
+                    { 
+                        echo '
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer">'.$name.' : '.$message.'
+                                <span class="msg_time">
+                                '.$time.'</span>
+							</div>
+						</div>';
+                   }
+                  
+        
+                    else { 
+                        
+                        echo '
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="msg_cotainer">' . $name . ' : ' . $message . '
+                                <span class="msg_time">
+                                ' . $time . '</span>
+							</div>
+						</div>';
+
+                }
+                
+                ?>
+
+                    <?php //end while }?>
 
             </div>
         </div>
         <div id="form">
             <br />
-            <?php if (isset($_GET['error'])): ?>
+            <?php if (isset($_GET['error'])){ ?>
             <div class="alert alert-danger" role="alert">
                 <strong>Sorry</strong>
                 <?php echo $_GET['error'] ?>
             </div>
-        <?php endif?>
+            <?php //end if }?>
         </div>
 </div>
                      <form method="post" action="action.php">
@@ -520,263 +565,6 @@ if ($rowcount1 > 0) {
 
 
  </div>
-
-
- <!--/CHATS-->
-
-
-<!-- ONGOING -->
-    <div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
-
- <!--Table-->
- <div class="container">
-
-<?php
-// Fetch User Project/Team info
-
-$query1 = @"SELECT DISTINCT(projects.proj_id),projects.title,projects.leader_id,projects.created from projects inner join team on team.proj_id=projects.proj_id where team.mem_id=$id OR team.leader_id=$id";
-$result1 = @mysqli_query($link, $query1);
-$rowcount1 = @mysqli_num_rows($result1);
-
-if ($rowcount1 > 0) {
-    ?>
-    <table id="teams" class="table table-borderless table-striped" >
-                    <!--Table head-->
-                    <thead>
-                        <tr>
-
-                            <th>Project Title</th>
-                            <th>Started At</th>
-                            <th>Current Status</th>
-                        </tr>
-                    </thead>
-                    <!--Table head-->
-    <?php
-while ($row1 = mysqli_fetch_array($result1)) {
-        $proj_id = $row1['proj_id'];
-        $proj_title = $row1['title'];
-        $proj_start = $row1['created'];
-        $leader_id = $row1['leader_id'];
-        $idForModal = preg_replace('/[^A-Za-z0-9]/', '', $proj_title);
-
-        ?>
-
-                    <!--Table body-->
-                    <tbody>
-                        <tr>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#<?=$idForModal?>">
-                                   <strong><?=$proj_title?></strong>
-                                </a>
-
-
-
-                                <!-- Modal -->
-                                <div style="left:-15%;" class="modal fade" id="<?=$idForModal?>" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content" style="width:690px;">
-                                            <div class="modal-header indigo white-text">
-                                                <h5 class="modal-title" id="">Team for <?=$proj_title?></h5>
-                                                <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-                     <div class="modal-body">
-
-                           <!-- Editable table -->
-                     <div class="card">
-                           <h4 class="card-header text-center font-weight-bold text-uppercase py-4"> <?=$proj_title?></h4>
-                                     <div class="card-body">
-                                                        <div id="table" class="table-editable">
-                      <table class="table table-responsive-md  text-center" style="">
-<?php $query2 = @"SELECT * FROM team inner join users on users.id = team.mem_id where team.proj_id=$proj_id";
-        $result2 = @mysqli_query($link, $query2);
-        $rowcount2 = @mysqli_num_rows($result2);?>
-
-         <tr>
-                                                                    <th class="text-center">Person Name</th>
-                                                                    <th class="text-center">Course</th>
-                                                                    <th class="text-center">Joined </th>
-                                                                    <th class="text-center">Does</th>
-                                                                    <?php
-if ($leader_id == $id) {
-            echo '<th class="text-center">Remove</th>';
-        }?>
-                                                                </tr>
-  <?php
-while ($row2 = mysqli_fetch_assoc($result2)) {
-
-            $firstname = $row2['firstname'];
-            $lastname = $row2['lastname'];
-            $author = $firstname . " " . $lastname;
-            $course = $row2['course'];
-            $joined = $row2['joined'];
-            $joined = strtotime($joined);
-            $date = @date("d/m/Y", $joined);
-            $mem_id = $row2['mem_id'];
-            $proj_id = $row2['proj_id'];
-            $does = $row2['does'];
-
-            if (!($mem_id == $leader_id)) {?>
-                                                                <form method ="POST" action="action.php">
-                                                                <tr>
-                                                                    <td class="pt-3-half" contenteditable="false"><?=$author?></td>
-                                                                    <td class="pt-3-half" contenteditable="false"><?=$course?></td>
-                                                                    <td class="pt-3-half" contenteditable="false"><?=$date?></td>
-                                                                    <td class="pt-3-half" contenteditable="false"><input class="text-center grey-text" style="border:0; text-align:center;"type="text" name="does" value="<?=$does;?>"/></td>
-
-                                                                    <td>
-                <?php
-if ($leader_id == $id) {
-                echo '<span class="table-remove"><button name="remove" type="submit" class="btn btn-danger round btn-sm my-0">Remove</button></span>';
-            }?>
-
-                                                                    </td>
-                                                                </tr>
-
-                                                                <?php
-
-            }
-        }?>
-
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Editable table -->
-                                            </div>
-
-                                                <div class="modal-footer ">
-                                                <input type="submit" class="btn btn-indigo round btn-sm" name="save" value="Save"/>           </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </td>
-                            <td><?=$proj_start?></td>
-                            <td>In Progress.</td>
-
-                        </tr>
-
-                    </tbody>
-                    <!--Table body-->
-                   <?php
-//end blocks
-    }?>
-                </table>
-                <!--Table-->
-<?php
-
-}
-?>
-     </div>
-</div>
-
-<!-- /ONGOING -->
-
-
-
-<!-- REQUESTS -->
-
- <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-
-<div class="container ">
-<br>
-<br>
-
-<h5 class="text-center w-responsive mx-auto mb-3">Connect with developers and programmers.<br>Accept their requests to add them to your team.</h5>
-<br>
-
- <?php
-
-$queryR = @"SELECT * FROM users INNER JOIN team_req INNER JOIN projects ON team_req.mem_id = users.id && team_req.proj_id = projects.proj_id where team_req.leader_id=$id";
-$resultR = @mysqli_query($link, $queryR);
-$rowcountR = @mysqli_num_rows($resultR);
-if ($rowcountR > 0) {
-    while ($rowR = @mysqli_fetch_array($resultR)) {
-
-        $firstname = $rowR['firstname'];
-        $lastname = $rowR['lastname'];
-        $author = $firstname . " " . $lastname;
-        $course = $rowR['course'];
-        $profile = $rowR['profile'];
-        $portfolio = $rowR['portfolio'];
-        $skill = $rowR['skill'];
-        $title = $rowR['title'];
-        $proj_id = $rowR['proj_id'];
-        $leader_id = $rowR['leader_id'];
-        $mem_id = $rowR['mem_id'];
-        $idForPill = preg_replace('/[^A-Za-z0-9]/', '', $author);
-
-        echo '
-
-<div class="container-fluid w-50 p-3" style="border:1px solid #ededed;box-shadow: 2px 2px 2px 2px rgba(228,228,228,0.5); border-radius:10px;">
-
-<ul class="nav nav-pills mb-3 pills-secondary" id="pills-tab" role="tablist">
-<li class="nav-item">
-<a class="nav-link active" id="pills-req-tab" data-toggle="pill" href="#pills-' . $idForPill . '-req" role="tab"
-aria-controls="pills-req" aria-selected="true" style="margin:5px;">Request</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="pills-r-profile-tab" data-toggle="pill" href="#pills-' . $idForPill . '-profile" role="tab"
-aria-controls="pills-r-profile" aria-selected="false" style="margin:5px;">Profile</a>
-</li>
-</ul>
-<div class="tab-content pt-2 pl-1" id="pills-tabContent">
-<div class="tab-pane fade show active" id="pills-' . $idForPill . '-req" role="tabpanel" aria-labelledby="pills-req-tab">
-<div class="text-center"><a style="color:black;" href="' . $portfolio . '"><strong> ' . $author . ' </strong> </a> requests to join your <strong>' . $title . '</strong> project.
-<br>
-<form method="POST" class="text-center" action="action.php">
-<input type="hidden" name="leader_id" value="' . $leader_id . '">
-<input type="hidden" name="proj_id" value="' . $proj_id . '"/>
-<input type="hidden" name="mem_id" value="' . $mem_id . '"/>
-<input type="submit" class="btn btn-indigo round btn-sm" name="accept" value="Accept" />
-<input type="submit" class="btn btn-danger round btn-sm" name="decline" value="Decline" />
-</form></div></div>
-<div class="tab-pane fade" style="font-weight:normal; margin-left:5%; margin-bottom:3% ;" id="pills-' . $idForPill . '-profile" role="tabpanel" aria-labelledby="pills-r-profile-tab">
-<div>
-Name : ' . $author . '<br>
-Course : ' . $course . ' <br> Skills :' . $skill . '
-</div>
-</div>
-</div>
-</div>
-<br>
-
-';
-
-//Closing while loop
-    }
-
-} else {
-    echo '<div class="alert alert-danger text-center w-auto  p-3" role="alert">
-No member requests at the moment. Try posting some projects.
-</div>
-</div>
-</div>
-</div>';
-}
-?>
-
-
-            </div>
-        </div>
- <!--/REQUESTS -->
-
-
-
- </div>
-
- </div>
-
 
  <!--STYLE CHATS -->
 
@@ -923,9 +711,265 @@ No member requests at the moment. Try posting some projects.
 
  <!--/STYLE CHATS -->
 
+ <!--/CHATS-->
+
+
+<!-- ONGOING -->
+    <div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+
+ <!--Table-->
+ <div class="container">
 
 <?php
+// Fetch User Project/Team info
 
+$query1 = @"SELECT * FROM projects inner join users on projects.leader_id = users.id where users.id = $id";
+$result1 = @mysqli_query($link, $query1);
+$rowcount1 = @mysqli_num_rows($result1);
+
+if ($rowcount1 > 0) {
+    ?>
+    <table id="teams" class="table table-borderless table-striped">
+                    <!--Table head-->
+                    <thead>
+                        <tr>
+
+                            <th>Project Title</th>
+                            <th>Started At</th>
+                            <th>Current Status</th>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
+    <?php
+while ($row1 = mysqli_fetch_array($result1)) {
+        $proj_id = $row1['proj_id'];
+        $proj_title = $row1['title'];
+        $proj_start = $row1['created'];
+        $leader_id = $row1['leader_id'];
+        $idForModal = preg_replace('/[^A-Za-z0-9]/', '', $proj_title);
+
+        ?>
+
+                    <!--Table body-->
+                    <tbody>
+                        <tr>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <a data-toggle="modal" data-target="#<?=$idForModal?>">
+                                   <strong><?=$proj_title?></strong>
+                                </a>
+
+
+
+                                <!-- Modal -->
+                                <div style="left:-15%;" class="modal fade" id="<?=$idForModal?>" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content" style="width:690px;">
+                                            <div class="modal-header indigo white-text">
+                                                <h5 class="modal-title" id="">Team for <?=$proj_title?></h5>
+                                                <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                     <div class="modal-body">
+
+                           <!-- Editable table -->
+                     <div class="card">
+                           <h4 class="card-header text-center font-weight-bold text-uppercase py-4"> <?=$proj_title?></h4>
+                                     <div class="card-body">
+                                                        <div id="table" class="table-editable">
+
+                                                            <table class="table table-responsive-md  text-center">
+<?php $query2 = @"SELECT * FROM team inner join users on users.id = team.mem_id where team.proj_id=$proj_id";
+        $result2 = @mysqli_query($link, $query2);
+        $rowcount2 = @mysqli_num_rows($result2);
+        if ($rowcount2 > 0) {?>
+                                                                <tr>
+                                                                    <th class="text-center">Person Name</th>
+                                                                    <th class="text-center">Course</th>
+                                                                    <th class="text-center">Joined </th>
+                                                                    <th class="text-center">Does</th>
+                                                                    <th class="text-center">Remove</th>
+                                                                </tr>
+                                                                <?php
+while ($row2 = mysqli_fetch_array($result2)) {
+            $firstname = $row2['firstname'];
+            $lastname = $row2['lastname'];
+            $author = $firstname . " " . $lastname;
+            $course = $row2['course'];
+            $joined = $row2['joined'];
+            $joined = strtotime($joined);
+            $date = @date("d/m/Y", $joined);
+            $mem_id = $row2['mem_id'];?>
+
+                                                                <tr>
+                                                                    <td class="pt-3-half" contenteditable="false"><?=$author?></td>
+                                                                    <td class="pt-3-half" contenteditable="false"><?=$course?></td>
+                                                                    <td class="pt-3-half" contenteditable="false"><?=$date?></td>
+                                                                    <td class="pt-3-half" contenteditable="true">lol</td>
+
+                                                                    <td>
+                                                                        <span class="table-remove"><button name="remove"
+                                                                                class="btn btn-danger round btn-sm my-0">Remove</button></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php
+
+        }
+        } else {
+            $error = '<div class="alert alert-danger text-dark text-center" role="alert" style="margin-top:3%;">
+  No team members added to this project.</div>';
+            echo $error;
+        }?>
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Editable table -->
+                                            </div>
+                                            <div class="modal-footer ">
+                                                <button  class="btn btn-indigo round btn-sm">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </td>
+                            <td><?=$proj_start?></td>
+                            <td>In Progress.</td>
+
+                        </tr>
+
+                    </tbody>
+                    <!--Table body-->
+                   <?php
+//end blocks
+    }?>
+                </table>
+                <!--Table-->
+<?php
+
+} else {
+    $error = '<div class="alert alert-danger text-dark text-center" role="alert" style="margin-top:3%;">
+  Sorry no ongoing projects. Try posting a new project or request to join others.</div>';
+    echo $error;
+}
+
+?>
+     </div>
+</div>
+
+<!-- /ONGOING -->
+
+
+
+<!-- REQUESTS -->
+
+ <div class="tab-pane fadez" id="users" role="tabpanel" aria-labelledby="users-tab">
+
+<div class="container ">
+<br>
+<br>
+
+<h5 class="text-center w-responsive mx-auto mb-3">Connect with developers and programmers.<br>Accept their requests to add them to your team.</h5>
+<br>
+
+ <?php
+
+$queryR = @"SELECT * FROM users INNER JOIN team_req INNER JOIN projects ON team_req.mem_id = users.id && team_req.proj_id = projects.proj_id where team_req.leader_id=$id";
+$resultR = @mysqli_query($link, $queryR);
+$rowcountR = @mysqli_num_rows($resultR);
+if ($rowcountR > 0) {
+    while ($rowR = @mysqli_fetch_array($resultR)) {
+
+        $firstname = $rowR['firstname'];
+        $lastname = $rowR['lastname'];
+        $author = $firstname . " " . $lastname;
+        $course = $rowR['course'];
+        $profile = $rowR['profile'];
+        $skill = $rowR['skill'];
+        $title = $rowR['title'];
+        $proj_id = $rowR['proj_id'];
+        $leader_id = $rowR['leader_id'];
+        $mem_id = $rowR['mem_id'];
+        $idForPill = preg_replace('/[^A-Za-z0-9]/', '', $author);
+
+        echo '
+
+<div class="container-fluid w-50 p-3" style="border:1px solid #ededed;box-shadow: 2px 2px 2px 2px rgba(228,228,228,0.5); border-radius:10px;">
+
+<ul class="nav nav-pills mb-3 pills-secondary" id="pills-tab" role="tablist">
+<li class="nav-item">
+<a class="nav-link active" id="pills-req-tab" data-toggle="pill" href="#pills-' . $idForPill . '-req" role="tab"
+aria-controls="pills-req" aria-selected="true" style="margin:5px;">Request</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="pills-r-profile-tab" data-toggle="pill" href="#pills-' . $idForPill . '-profile" role="tab"
+aria-controls="pills-r-profile" aria-selected="false" style="margin:5px;">Profile</a>
+</li>
+</ul>
+<div class="tab-content pt-2 pl-1" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-' . $idForPill . '-req" role="tabpanel" aria-labelledby="pills-req-tab">
+<div class="text-center"><strong> ' . $author . ' </strong> requests to join your <strong>' . $title . '</strong> project.
+<br>
+<form method="POST" class="text-center" action="action.php">
+<input type="hidden" name="leader_id" value="' . $leader_id . '">
+<input type="hidden" name="proj_id" value="' . $proj_id . '"/>
+<input type="hidden" name="mem_id" value="' . $mem_id . '"/>
+<input type="submit" class="btn btn-indigo round btn-sm" name="accept" value="Accept" />
+<input type="submit" class="btn btn-danger round btn-sm" name="decline" value="Decline" />
+</form></div></div>
+<div class="tab-pane fade" style="font-weight:normal; margin-left:5%; margin-bottom:3% ;" id="pills-' . $idForPill . '-profile" role="tabpanel" aria-labelledby="pills-r-profile-tab">
+<div>
+Name : ' . $author . '<br>
+Course : ' . $course . ' <br> Skills :' . $skill . '
+</div>
+</div>
+</div>
+</div>
+<br>
+
+';
+
+//Closing while loop
+    }
+
+} else {
+    echo '<div class="alert alert-danger text-center w-auto  p-3" role="alert">
+No member requests at the moment. Try posting some projects.
+</div>
+</div>
+</div>
+</div>';
+}
+?>
+
+
+            </div>
+        </div>
+ <!--/REQUESTS -->
+
+
+
+ </div>
+
+ </div>
+
+
+
+
+<?php
+            
 include "footer.php";
 
 ?>

@@ -10,14 +10,14 @@ include 'db.php';
 include "header.php";
 
 if (!isset($_SESSION['email']) and !isset($_SESSION['password'])) {
-    header("Location:index.php");
+    header("Location:../index.php");
     // To check if user is logged in
 } else {
     // Destroying session if 30 mins have passed after logging in
     $now = time();
     if ($now > $_SESSION['expire']) {
         session_destroy();
-        header("Location:index.php?sessiontimedout=true");
+        header("Location:../index.php?sessiontimedout=true");
     }
 }
 
@@ -217,13 +217,10 @@ word-wrap: break-word;
     <div style="margin:3%;margin-top: 6%;">
     <!-- TABS -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            
             <li class="nav-item">
-                <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                    aria-selected="true" style="color:#b9b9b9">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit"
-                    aria-selected="false" style="color: #b9b9b9;">Edit Projects</a>
+                <a class="nav-link active" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing"
+                    aria-selected="false" style="color: #b9b9b9;">Ongoing Projects</a>
             </li>
 
             <li class="nav-item">
@@ -241,246 +238,7 @@ word-wrap: break-word;
         </ul>
 <!--/TABS-->
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-            <!--PROFILE -->
-                <div class="content" style="margin: 3% 2%">
-                    <div class="container-fluid">
-                        <div class="row">
-
-                         <div class="col-md-4 text-center" style="margin-top:2.5%;">
-
-                                <div class="card card-user" style="text-align: center;">
-                                    <div class="content">
-                                        <div class="author">
-
-                                                <br>
-
-
-                                 <div class="md-form mt-0 w-auto p-3">
-
-                                <div class="custom-file" style="">
-                        <a href="<?php
-                    if ($checkprofile) {
-                        echo $portfolio;
-                    }?>" target="_blank" data-toggle="<?php
-                    if (!$checkprofile) {
-                        echo "modal";
-                    }?>" data-target="<?php
-                    if (!$checkprofile) {
-                        echo "#editProfile";
-                    }?>">
-                    <img class="avatar border-gray pull-center hoverable" src="<?php
-
-                    if (is_null($profile)) {
-                        echo "./img/default/add-profile.png";
-                        $checkprofile = false;
-                    } else {
-                        echo $profile;
-                        $checkprofile = true;
-                    }
-
-                    ?>" style="border-radius:25%;width:200px;height:160px;margin-bottom:10%;">
-                            </a>
-
-                        <div class="container" style="margin-bottom:;">
-
-                        <a data-toggle="modal" class="pull-right" data-target="#editProfile" id="prof_btn" style="margin:5%;">
-                        <i class="far fa-edit"></i></a>
-
-                        <div class="modal fade w-auto" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header" style="color:white;background:#4842B7;">
-                                <h5 class="modal-title" id="editProfile">Edit Profile Picture</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" style="color:white;">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                        <form method="post" enctype="multipart/form-data">
-                        <div class="input-group container" style="padding:10%;">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload"  aria-describedby="inputGroupFileAddon01">
-                            <label class="custom-file-label grey-text" for="inputGroupFile01" placeholder="Choose a file"> </label>
-                        </div>
-                         <br>
-                         <div class="input-group-prepend">
-                            <input type="submit" value="Upload Image" name="updbtn" class="input-group-text mb-3 indigo white-text">
-                        </div>
-
-                        </div>
-                        </form>
-
-                            </div>
-                            <div class="modal-footer" style="color:white;background:#4842B7;">
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                         </div>
-                            </div>
-                                </div>
-                                     <h4 class="title black-text" style="margin-bottom:5%;"><br />
-                                    <?php
-echo "<strong>".$firstname . " " . $lastname."</strong>";
-?>
-                                    </h4>
-                                    </a>
-                                    </div>
-                                        <div class="form- container">
-
-                                                    <input type="text" placeholder="Add your bio here" disabled class="form-control edit"  name="bio" id="bio" value="<?php
-echo $bio; ?>">
-
-                                        </div>
-
-                                    </div>
-                                    <br>
-                                    <div class="container">
-                                        <div class="form-group">
-
-                                            <input type="email" placeholder="Add your portfolio here" name="email" class="form-control edit" name = "portfolio" value="<?php
-echo $portfolio; ?>"
-                                                disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!---->
-
-                            <div class="col-md-8" >
-
-
-                                <div class="content">
-                                    <form method="POST" >
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Enrollment</label>
-                                                    <input  type="number" class="form-control" name="enrollment" disabled
-                                                        value="<?php
-
-echo $enrollment; ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="firstname">First Name</label>
-                                                    <input type="text" class="form-control edit" name="firstname"
-                                                        value="<?php
-
-echo $firstname;
-?>"
-                                                        disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="lastname">Last Name</label>
-                                                    <input type="text" name="lastname" class="form-control edit"
-                                                        value="<?php
-echo $lastname; ?>"
-                                                        disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="course">Course</label>
-                                                    <input type="text" name="course" disabled class="form-control edit"
-                                                        value="<?php
-echo $course; ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="text" name="email" disabled class="form-control edit"
-                                                        value="<?php
-echo $email; ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="gender">Gender</label>
-                                                    <input type="text" disabled class="form-control edit" name="gender"
-                                                        value="<?php
-echo $gender; ?>" id="gender">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>DOB</label>
-                                                    <input type="text" disabled class="form-control edit" name="dob"
-                                                        value="<?php
-echo $dob; ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Points</label>
-                                                    <input type="number" disabled name="points" class="form-control"
-                                                         value="#">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Rank</label>
-                                                    <input type="text" disabled class="form-control" name="rank"
-                                                         value="#">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Skills</label>
-
-                                                    <textarea  disabled class="form-control edit"  name="skill" id="skill" placeholder="Add your skills here"value="<?php
-echo $skill; ?>">
-                                                                <?php
-echo $skill; ?>
-                                                </textarea>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row" style="margin-left:-5px;">
-
-                                            <div class="col-sm-2">
-                                                <button class="btn round purple darken-4" style="color:white;font-weight:normal;background:white;" id="ebutton" onclick="return false">Edit</button>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <button type="submit" id="up_btn" name= "update_user" class="btn round pink darken-3" style="color:white;font-weight:normal;background:white;">Update</button>
-                                            </div>
-
-
-                                        </div>
-
-                                        <div class="clearfix"></div>
-                                    </form>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!-- / PROFILE-->
-
+         
  <!-- CHATS -->
  <div class="tab-pane fade" id="chats" role="tabpanel" aria-labelledby="chats-tab">
 
@@ -599,70 +357,207 @@ if ($rowcount1 > 0) {
  <!--/CHATS-->
 
 
-<!-- EDIT -->
+<!-- ONGOING -->
 
 
-<div class="tab-pane fade show active" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+<div class="tab-pane fade show active " id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+ <!--Table-->
+    <div class="container">
+    <br>
+    <br>
+    <h5 class="text-center w-responsive mx-auto mb-3">The projects you are working on will be displayed here.</h5>
+<br>
+    <?php if (count($data) > 0) {
 
-<div class="container" style="margin-top:2%;">
-    <!--Section: Contact v.2-->
-    <section class="mb-4">
+    ?>        <table id="projects" class="table table-borderless table-striped table-hover" >
+                    <!--Table head-->
+                    <thead>
+                        <tr>
 
-      <!--Section heading-->
-      <h2 class="h1-responsive font-weight-bold text-center my-4" style="font-size:2.8rem; font-family: 'Ropa Sans',
-        sans-serif;margin-top:2%;">Update your project details</h2>
+                            <th>Project Title</th>
+                            <th>Started At</th>
+                            <th>Current Status</th>
+                            <th colspan="3">Options</th>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
 
-    </section>
-  </div>
-  <div class="container">
-    <!-- Default form contact -->
-    <form class="text-center" style="margin:3% 0% 3% 0%;" method="POST"  enctype="multipart/form-data">
+                    <!--Table body-->
+                    <tbody>
 
+        <?php
+foreach ($data as $key => $value) {
+        $idForModal = preg_replace('/[^A-Za-z0-9]/', '', $value['proj_title']);
+        $proj_id = $value['proj_id'];
+        ?>
+                    <tr>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <a data-toggle="modal" data-target="#<?=$idForModal?>">
+                                   <strong><?=$value['proj_title']?></strong>
+                                </a>
+                            </td>
 
-      <!-- Title -->
-      <input type="text" id="defaultContactFormSubject" class="form-control mb-4" placeholder="Project Title" name="title">
+                            <td>
+                            <?php /*
+        $date = @date("d/m/Y", $value['proj_start']);
+        echo $date;*/
+        echo $value['proj_start']; ?>
+                            </td>
 
-      <!-- Resources -->
-      <input type="text" id="defaultContactFormSubject" class="form-control mb-4" placeholder="Resources Required" name="resources">
+                            <td>
+                            In Progress
+                            </td>
+                           
+                             <td>
+                            <a class="btn round btn-sm" href="./editproject.php" style="color:purple;font-weight:normal;background:white;">Edit</a>
+                            </td>
+                             <form method="POST">
+                             <td>
+                                 <input type="hidden" value="<?=$proj_id?>" name= "proj_id_del">
+                            <button class="btn round btn-sm" type="submit" name = "delete_proj" style="color:red;font-weight:normal;background:white;">Delete</button>
+                            </td>
+                             <td>
+                                  <input type="hidden" value="<?=$proj_id?>" name= "proj_id_comp">
+                            <button class="btn round btn-sm" type="submit" name = "complete_proj"style="color:blue;font-weight:normal;background:white;">Finish</button>
+                            </td>
+                        </form>
+                    </tr>
+            <?php
+}?>
+                    </tbody>
+</table>
+<?php
 
-    <!-- Brief -->
-      <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" placeholder="Project Brief" name="brief"></textarea>
-    </div>
+} else {
+    echo '<div style="margin-top:2%;" class="alert alert-danger container text-center p-3" role="alert">
+                        Sorry, you dont have any projects going on.
+                        </div>';
+}
 
-      <!-- Description -->
-      <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Project Description" name="description"></textarea>
+?>
+     </div>
+<?php
+foreach ($data as $project => $pvalue) {
+    $idForModal = preg_replace('/[^A-Za-z0-9]/', '', $pvalue['proj_title']);
+
+    ?>
+<!-- Modal -->
+<div class="modal fade" id="<?=$idForModal?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content" style="width:690px;">
+     <div class="modal-header indigo white-text">
+        <h5 class="modal-title" id="exampleModalLabel"><?=$pvalue['proj_title']?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color:white;">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
 
-      <!-- Cover -->
+      <?php
+if (count($pvalue['team']) > 1 || count($pvalue["team"]) != 1 && $id != $pvalue["mem_id"]) {
 
-        <div class="input-default-wrapper mt-3 w-50 p-3" style="margin-left:-1.5%;">
-        <span class="input-group-text mb-3 white-text indigo" id="input1">Upload</span>
-        <input type="file" id="file-with-current" name="fileToUpload" id="fileToUpload" class="input-default-js">
-        <label class="label-for-default-js rounded-right mb-3" for="file-with-current"><span class="span-choose-file">Choose
-            file</span>
-            <div class="float-right span-browse white-text indigo">Browse</div>
-        </label>
-        </div>
+        ?><form method="POST" action="action.php">
+        <table id="teams" class="table table-borderless table-striped" >
+                    <!--Table head-->
+                    <thead>
+                        <tr>
 
-            <!-- Submit button -->
-         <div class="row">
-         <div class="col-2">
-        <button class="btn btn-indigo round" type="submit" style="width:125px;" name="upd_btn">Update</button>
-         </div>
-         <div class="col-4-sm">
-               <a href="./profile.php" class="btn pink darken-2 round" style="width:125px;color:white;" name="submit">Cancel</a>
-         </div>
+                            <th class="text-center">Person Name</th>
+                            <th class="text-center">Joined On</th>
+                            <th class="text-center">Does</th>
+                           <?php if ($id == $pvalue['leader_id']) {echo '<th class="text-center">Remove</th>';}?>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody class="text-center">
+<?php
+foreach ($pvalue["team"] as $team => $tvalue) {
+            $mem_id = $tvalue['mem_id'];
+            if ($id == $tvalue["mem_id"]) {
+                continue;
+
+            }
+            ?>
+
+                        <tr>
+
+
+                        <td class="pt-3-half text-center" >
+                <?php if ($tvalue['mem_id'] == $pvalue['leader_id']) {
+                echo '<strong>' . $tvalue["firstname"] . ' ' . $tvalue["lastname"] . '</strong>';
+            } else {
+                echo $tvalue["firstname"] . ' ' . $tvalue["lastname"];
+            }?>
+                            </td>
+                            <td class="pt-3-half text-center" >
+                <?=$tvalue["joined"]?>
+                            </td>
+                           <td class="pt-3-half text-center" contenteditable="false"><input class="text-center grey-text" style="background:none; border:0; text-align:center;"type="text" name="does" value="<?=$tvalue['does'];?>"/><i class="fas fa-pen-square"></i></td>
+                           <?php if ($id == $pvalue['leader_id']) {echo ' <td>
+<span class=" text-center"><button name="remove" type="submit" class="btn btn-danger round btn-sm my-0">Remove</button></span>
+                            </td>';}?>
+                        </tr>
+
+<?php
+}?>
+                    </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-indigo round btn-sm" name="save" value="Save"/>
+      </div>
+</form>
+<?php
+} else {
+        echo '</div>
+        <div class="container">
+        <div class="alert alert-danger text-center" role="alert">
+                        <p>Sorry, no team members found.</p>
+                        </div>
+        </div>';
+    }
+    ?>
     </div>
-    </form>
-    <!-- Default form contact -->
   </div>
+</div>
+<?php
 
-
+}?>
 </div>
 
-<!-- /EDIT -->
+<?php 
+//Delete project
+
+
+if(isset($_POST['delete_proj']))
+{   $proj_id_del = $_POST['proj_id_del'];
+    $query="DELETE from `projects` WHERE `proj_id` = '$proj_id_del' ";
+    $result = @mysqli_query($link,$query);
+
+    if($result)
+    {
+    echo ' <script>
+    swal({
+        title :"Deleted" ,text : "Project deleted from your list" ,
+            icon : "info"
+    }
+    ) 
+    </script> ';
+    } else {
+        echo mysqli_error($link);
+    }
+
+}
+
+?>
+
+
+
+<!-- /ONGOING -->
 
 
 

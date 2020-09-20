@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include '../partials/header.php';
 ?>
 
 <body>
@@ -8,16 +8,13 @@ include "header.php";
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="fr-tab" data-toggle="tab" href="#front" role="tab" aria-controls="front"
-                    aria-selected="true" style="color: #757575;">Frontend</a>
+                <a class="nav-link active" id="fr-tab" data-toggle="tab" href="#front" role="tab" aria-controls="front" aria-selected="true" style="color: #757575;">Frontend</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="bk-tab" data-toggle="tab" href="#back" role="tab" aria-controls="back"
-                    aria-selected="false" style="color: #757575;">Backend</a>
+                <a class="nav-link" id="bk-tab" data-toggle="tab" href="#back" role="tab" aria-controls="back" aria-selected="false" style="color: #757575;">Backend</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="ms-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="misc"
-                    aria-selected="false" style="color: #757575;">Miscellaneous</a>
+                <a class="nav-link" id="ms-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="misc" aria-selected="false" style="color: #757575;">Miscellaneous</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -36,8 +33,7 @@ include "header.php";
                                 <p class="mb-4 pb-2 px-md-5 mx-md-5">A-Frame is an open-source web framework for
                                     building virtual reality (VR)
                                     experiences.</p>
-                                <a href="https://aframe.io/docs/0.8.0/introduction/" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo round">Read
+                                <a href="https://aframe.io/docs/0.8.0/introduction/" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -71,8 +67,7 @@ include "header.php";
                                 <p class="card-text">
                                     A lightweight JavaScript library for creating particles .</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://github.com/VincentGarreau/particles.js/" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo round">Read
+                                <a href="https://github.com/VincentGarreau/particles.js/" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -101,8 +96,7 @@ include "header.php";
                                     compiler. It splits up a web
                                     application into two parts: the view and the data. </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://kbrsh.github.io/moon/doc/about.html" target="_blank"> <button type="button"
-                                        class="btn btn-sm indigo round">Read
+                                <a href="https://kbrsh.github.io/moon/doc/about.html" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -177,8 +171,7 @@ include "header.php";
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="https://cdn.ttgtmedia.com/rms/onlineimages/oracle-plsql_vs_sql_mobile.png"
-                                    alt="Card image cap">
+                                <img class="card-img-top" src="https://cdn.ttgtmedia.com/rms/onlineimages/oracle-plsql_vs_sql_mobile.png" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -208,8 +201,7 @@ include "header.php";
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="https://maxtrain.com/wp-content/uploads/2018/01/ASP-MVC-WEB-API-COURSEWARE-IMAGE.jpg"
-                                    alt="Card image cap">
+                                <img class="card-img-top" src="https://maxtrain.com/wp-content/uploads/2018/01/ASP-MVC-WEB-API-COURSEWARE-IMAGE.jpg" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -226,8 +218,7 @@ include "header.php";
                                     Model-View-Controller design pattern.
                                 </p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2"
-                                    target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
+                                <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2" target="_blank"> <button type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -256,8 +247,7 @@ include "header.php";
                                     controlled
                                     by JavaScript Power</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://github.com/Automattic/mongoose"> <button target="_blank" type="button"
-                                        class="btn btn-sm indigo round">Read
+                                <a href="https://github.com/Automattic/mongoose"> <button target="_blank" type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -303,8 +293,7 @@ include "header.php";
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="https://pluginsworld.com/wp-content/uploads/2018/08/wordfence-small.jpg"
-                                    alt="Card image cap">
+                                <img class="card-img-top" src="https://pluginsworld.com/wp-content/uploads/2018/08/wordfence-small.jpg" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -334,8 +323,7 @@ include "header.php";
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="https://image.slidesharecdn.com/raml10release-151123194957-lva1-app6892/95/raml-10-release-1-638.jpg?cb=1448308306"
-                                    alt="Card image cap">
+                                <img class="card-img-top" src="https://image.slidesharecdn.com/raml10release-151123194957-lva1-app6892/95/raml-10-release-1-638.jpg?cb=1448308306" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -364,8 +352,7 @@ include "header.php";
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img class="card-img-top" src="https://s3.amazonaws.com/flydata.com/wp-content/uploads/2015/12/microsoft-azure.jpg"
-                                    alt="Card image cap">
+                                <img class="card-img-top" src="https://s3.amazonaws.com/flydata.com/wp-content/uploads/2015/12/microsoft-azure.jpg" alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
@@ -382,8 +369,7 @@ include "header.php";
                                     deploying, and managing applications and services through a global network of
                                     Microsoft-managed data centers.</p>
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a href="https://azure.microsoft.com/en-in/"> <button target="_blank" type="button"
-                                        class="btn btn-sm indigo round">Read
+                                <a href="https://azure.microsoft.com/en-in/"> <button target="_blank" type="button" class="btn btn-sm indigo round">Read
                                         more</button></a>
 
                             </div>
@@ -397,6 +383,6 @@ include "header.php";
             </div>
         </div>
     </div>
-<?php
-include "footer.php";
-?>
+    <?php
+    include '../partials/footer.php';
+    ?>

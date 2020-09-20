@@ -4,43 +4,37 @@
 // Starting the session
 session_start();
 $id = $_SESSION['id'];
-include('db.php');
-    if (!isset($_SESSION['email']) AND !isset($_SESSION['password'])) 
-    {
-        header("Location:index.php");
-        // To check if the user is logged in 
+include '../db.php';
+if (!isset($_SESSION['email']) and !isset($_SESSION['password'])) {
+    header("Location:../index.php");
+    // To check if the user is logged in 
+} else {
+    // Destroying session if 30 mins have passed after logging in
+    $now = time();
+    if ($now > $_SESSION['expire']) {
+        session_destroy();
+        header("Location:../index.php");
     }
-   else {
-        // Destroying session if 30 mins have passed after logging in
-        $now = time();
-        if ($now > $_SESSION['expire']) {
-            session_destroy();
-            header("Location:index.php");
-        }
+}
+$error = "";
+
+if (array_key_exists('email', $_POST) or array_key_exists('subject', $_POST) or array_key_exists('title', $_POST) or array_key_exists('information', $_POST)) {
+    $email = mysqli_real_escape_string($link, $_POST['email']);
+    $title = mysqli_real_escape_string($link, $_POST['title']);
+    $information = mysqli_real_escape_string($link, $_POST['information']);
+    $subject = mysqli_real_escape_string($link, $_POST['subject']);
+
+    $query = "INSERT INTO `userinfo`.`newsfeed`( `title`,`information`,`subject`,`email`) VALUES ('$title','$information','$subject','$email')";
+
+    if (mysqli_query($link, $query)) {
+
+        echo "<p>You have successfully submitted the form!";
+    } else {
+
+        echo "<p>Error :</p>" . mysqli_error($query), E_USER_ERROR;
     }
-$error =""; 
-
-    if (array_key_exists('email', $_POST) OR array_key_exists('subject', $_POST) OR array_key_exists('title', $_POST) OR array_key_exists('information', $_POST) )
-    {
-          $email = mysqli_real_escape_string($link, $_POST['email']);
-          $title = mysqli_real_escape_string($link, $_POST['title']);
-          $information = mysqli_real_escape_string($link, $_POST['information']);
-          $subject = mysqli_real_escape_string($link, $_POST['subject']);
-
-          $query = "INSERT INTO `userinfo`.`newsfeed`( `title`,`information`,`subject`,`email`) VALUES ('$title','$information','$subject','$email')";
-                
-                if (mysqli_query($link, $query)) {
-                    
-                    echo "<p>You have successfully submitted the form!";
-                    
-                } else {
-                    
-                    echo "<p>Error :</p>".mysqli_error($query),E_USER_ERROR;
-                    
-                }
-                
-            }
-    include("header.php");
+}
+include '../partials/header.php';
 ?>
 
 <body>
@@ -88,6 +82,6 @@ $error ="";
         <!-- Default form contact -->
     </div>
 
-   <?php
-   include("footer.php");
-   ?>
+    <?php
+    include '../partials/footer.php';
+    ?>

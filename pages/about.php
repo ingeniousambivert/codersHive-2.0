@@ -2,12 +2,11 @@
 
 <?php
 session_start();
-if
-(isset($_SESSION['email']) and isset($_SESSION['password'])) {
-    include "header.php";
+if (isset($_SESSION['email']) and isset($_SESSION['password'])) {
+    include "../partials/header.php";
     // To check if the user is logged in and include the header in.
 } else {
-    include "header_guest.php";
+    include "../partials/header_guest.php";
     // To include the guest header in.
 }
 
@@ -50,9 +49,9 @@ if
 
                         <!--Title-->
                         <h4 class="card-title ">
-                        <a href="https://ingeniousambivert.github.io/" style="color:white"target="_blank">
-                            Monarch Maisuriya
-                        </a></h4>
+                            <a href="https://ingeniousambivert.github.io/" style="color:white" target="_blank">
+                                Monarch Maisuriya
+                            </a></h4>
                         <!--Text-->
                         <p class="card-text white-text">Co-Founder | Core Developer</p>
 
@@ -70,10 +69,10 @@ if
                     <div class="card-body text-center">
 
                         <!--Title-->
-                         <h4 class="card-title ">
-                       <a href="#" style="color:white"target="_blank">
-                          Himanshu Joshi
-                        </a></h4>
+                        <h4 class="card-title ">
+                            <a href="#" style="color:white" target="_blank">
+                                Himanshu Joshi
+                            </a></h4>
                         <!--Text-->
                         <p class="card-text white-text">Co-Founder | Core Developer</p>
 
@@ -94,30 +93,11 @@ if
 
                             <tbody>
                                 <tr>
-
                                     <td><strong>Abhidyu Adukia</strong></td>
-
                                 </tr>
+
                                 <tr>
-
-                                    <td><strong>Ronak Parmar</strong></td>
-
-
-                                </tr>
-                                <tr>
-
                                     <td><strong>Dhiraj Joshi</strong></td>
-
-                                </tr>
-                                <tr>
-
-                                    <td><strong>Jolly Sharma</strong></td>
-
-                                </tr>
-                                <tr>
-
-                                    <td><strong>Umang Sharma</strong></td>
-
                                 </tr>
                             </tbody>
                         </table>
@@ -128,29 +108,11 @@ if
 
                             <tbody>
                                 <tr>
-
                                     <td><strong>Parin Patel</strong></td>
-
                                 </tr>
-                                <tr>
 
-                                    <td><strong>Jhanvi Sutar</strong></td>
-
-                                </tr>
-                                <tr>
-
-                                    <td><strong>Vatsal Mehta</strong></td>
-
-                                </tr>
-                                <tr>
-
-                                    <td><strong>Maruf Memon</strong></td>
-
-                                </tr>
                                 <tr>
                                     <td><strong>Jeet Kapadia</strong></td>
-
-
                                 </tr>
                             </tbody>
                         </table>
@@ -164,6 +126,6 @@ if
 
     </section>
 
-<?php
-include "footer.php";
-?>
+    <?php
+    include "footer.php";
+    ?>

@@ -4,21 +4,20 @@
 // Starting the session
 session_start();
 $id = $_SESSION['id'];
-include('db.php');
-    if (!isset($_SESSION['email']) AND !isset($_SESSION['password'])) 
-    {
-        header("Location:index.php");
-        // To check if the user is logged in 
-    }
-   else {
-      // Destroying session if 30 mins have passed after logging in
-        $now = time();
-        if ($now > $_SESSION['expire']) {
-            session_destroy();
-            header("Location:index.php");
-        }
-    } 
-include("header.php");
+include "../db/db.php";
+
+if (!isset($_SESSION['email']) and !isset($_SESSION['password'])) {
+  header("Location:../index.php");
+  // To check if the user is logged in 
+} else {
+  // Destroying session if 30 mins have passed after logging in
+  $now = time();
+  if ($now > $_SESSION['expire']) {
+    session_destroy();
+    header("Location:../index.php");
+  }
+}
+include '../partials/header.php';
 ?>
 
 <body>
@@ -102,6 +101,6 @@ include("header.php");
     <!--Table-->
 
   </div>
-  <?php 
-include("footer.php");
-?>
+  <?php
+  include '../partials/footer.php';
+  ?>
