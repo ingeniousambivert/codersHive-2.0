@@ -1,20 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { debugContextDevtool } from 'react-context-devtool';
-import { StoreProvider } from "@store";
+import { StoreProvider } from '@store';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-const rootContainer = document.getElementById("root");
+const rootContainer = document.getElementById('root');
 
 ReactDOM.render(
-	// <React.StrictMode>
-	<StoreProvider>
-		<App />
-	</StoreProvider>,
-	// </React.StrictMode>,
-	rootContainer
+  // <React.StrictMode>
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  // </React.StrictMode>,
+  rootContainer,
 );
 
 debugContextDevtool(rootContainer);

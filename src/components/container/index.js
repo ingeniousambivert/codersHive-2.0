@@ -1,11 +1,11 @@
-import React from "react";
-import { Row, Col } from "antd";
+import React from 'react';
+import { Row, Col } from 'antd';
 
 function Container(props) {
   const style = {
-    padding: props.padding ? props.padding : "2%",
-    margin: props.margin ? props.margin : "2%",
-    alignContent: "center",
+    padding: props.padding ? props.padding : '2%',
+    margin: props.margin ? props.margin : '2%',
+    alignContent: 'center',
   };
 
   return (

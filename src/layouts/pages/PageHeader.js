@@ -1,6 +1,6 @@
-import React from "react";
-import { Layout, Row, Col } from "antd";
-import Logo from "../partials/Logo";
+import React from 'react';
+import { Layout, Row, Col } from 'antd';
+import Logo from '../partials/Logo';
 
 const { Header } = Layout;
 
@@ -8,8 +8,8 @@ const PageHeader = (props) => {
   const headerStyle = {
     background: props.background,
     color: props.iconcolor,
-    padding: "1% 2.5%",
-    boxShadow: props.elevate ? "0px 1px 10px #999" : null,
+    padding: '1% 2.5%',
+    boxShadow: props.elevate ? '0px 1px 10px #999' : null,
   };
 
   return (

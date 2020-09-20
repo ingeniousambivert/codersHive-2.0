@@ -1,24 +1,23 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import RedirectSignin from "@pages/signin/redirect";
+import RedirectSignin from '@pages/signin/redirect';
 
 const ProtectedRoute = (props) => {
-	const { component: Component, ...rest } = props;
-	let isUserAuthenticated;
+  const { component: Component, ...rest } = props;
+  let isUserAuthenticated;
 
-	return (
-		<Route
-			{...rest}
-			render={(props) => {
-				if (isUserAuthenticated) {
-					return <Component {...props} />;
-				} else {
-					return <RedirectSignin />;
-				}
-			}}
-		/>
-	);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (isUserAuthenticated) {
+          return <Component {...props} />;
+        }
+        return <RedirectSignin />;
+      }}
+    />
+  );
 };
 
 export default ProtectedRoute;

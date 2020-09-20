@@ -1,19 +1,17 @@
-import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
-import "./assets/less/App.less";
-import "./assets/scss/style.scss";
+import './assets/less/App.less';
+import './assets/scss/style.scss';
 
-import Routes from "./routes";
+import Routes from './routes';
 
-const App = () => {
-	return (
-		<Router>
-			<Switch>
-				<Route component={Routes} />
-			</Switch>
-		</Router>
-	);
-};
+const App = () => (
+  <Router>
+    <Switch>
+      <Route component={Routes} />
+    </Switch>
+  </Router>
+);
 
 export default App;
