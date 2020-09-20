@@ -1,11 +1,14 @@
 import React from 'react';
+import Container from '@components/container';
 
 function HomeComponent() {
-  return (
-    <div>
-      Welcome
-    </div>
-  );
+	return (
+		<div>
+			<Container>
+				Welcome
+		</Container>
+		</div>
+	);
 }
 
 export default HomeComponent;
