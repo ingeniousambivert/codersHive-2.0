@@ -1,25 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+/* eslint-disable no-console */
+const logger = require('./utils/logger');
+const app = require('./app');
+const port = app.get('port');
+const server = app.listen(port);
 
-import { debugContextDevtool } from 'react-context-devtool';
-import { StoreProvider } from "@store";
-
-const rootContainer = document.getElementById("root");
-
-ReactDOM.render(
-	// <React.StrictMode>
-	<StoreProvider>
-		<App />
-	</StoreProvider>,
-	// </React.StrictMode>,
-	rootContainer
+process.on('unhandledRejection', (reason, p) =>
+  logger.error('Unhandled Rejection at: Promise ', p, reason)
 );
 
-debugContextDevtool(rootContainer);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+server.on('listening', () =>
+  logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
+);

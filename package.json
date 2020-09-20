@@ -1,65 +1,64 @@
 {
-  "name": "the-management-project-client",
-  "description": "Web app for theManagementProject",
-  "version": "0.1.0",
+  "name": "server",
+  "description": "Server for codersHive",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "main": "src",
   "keywords": [
-    "react"
+    "feathers"
   ],
   "author": {
     "name": "Monarch Maisuriya",
     "email": "monarchmaisuriya7600@gmail.com"
   },
-  "private": true,
-  "dependencies": {
-    "@babel/plugin-proposal-decorators": "^7.10.5",
-    "@feathersjs/authentication-client": "^4.5.6",
-    "@feathersjs/client": "^4.5.6",
-    "@feathersjs/feathers": "^4.5.5",
-    "@feathersjs/rest-client": "^4.5.6",
-    "@testing-library/jest-dom": "^5.9.0",
-    "@testing-library/react": "^10.2.1",
-    "@testing-library/user-event": "^11.1.0",
-    "antd": "^4.4.2",
-    "axios": "^0.19.2",
-    "babel-plugin-import": "^1.13.0",
-    "classnames": "^2.2.6",
-    "formik": "^2.1.5",
-    "formik-antd": "^2.0.1",
-    "immer": "^7.0.9",
-    "lodash": "^4.17.19",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-context-devtool": "^2.0.0",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
+  "engines": {
+    "node": "^14.0.0",
+    "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "yarn run lint && yarn run jest",
+    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "jest": "jest  --forceExit"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "standard": {
+    "env": [
+      "jest"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "ignore": []
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^4.5.3",
+    "@feathersjs/authentication-local": "^4.5.4",
+    "@feathersjs/authentication-oauth": "^4.5.4",
+    "@feathersjs/configuration": "^4.5.3",
+    "@feathersjs/errors": "^4.5.3",
+    "@feathersjs/express": "^4.5.4",
+    "@feathersjs/feathers": "^4.5.3",
+    "@feathersjs/socketio": "^4.5.4",
+    "@feathersjs/transport-commons": "^4.5.8",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "feathers-mongoose": "^8.3.1",
+    "helmet": "^3.23.3",
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^5.9.22",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
-    "customize-cra": "^1.0.0",
-    "customize-cra-react-refresh": "^1.1.0",
-    "less": "^3.12.2",
-    "less-loader": "^7.0.0",
-    "react-app-rewired": "^2.1.6"
+    "axios": "^0.20.0",
+    "eslint": "^7.4.0",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4"
   }
 }
